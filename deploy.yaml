@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-rest-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-rest-app
+  template:
+    metadata:
+      labels:
+        app: node-rest-app
+    spec:
+      containers:
+      - name: node-rest-app
+        env:
+        - name: MONGODB_URI
+          value: mongodb://mongodb:27017/
+        image: node-rest-app:v1.3
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 4000
